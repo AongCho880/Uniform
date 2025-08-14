@@ -245,7 +245,7 @@ function RouteComponent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+    console.log("formData---------: \n",formData);
     // Mark all fields as touched
     const allTouched: Record<string, boolean> = {};
     Object.keys(formData).forEach(key => {
@@ -261,7 +261,6 @@ function RouteComponent() {
       return;
     }
     
-    console.log("formData---------: \n",formData);
     setIsLoading(true);
     
     try {
