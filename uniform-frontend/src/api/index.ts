@@ -4,7 +4,7 @@ import type { User } from "@/context/AuthContext";
 import type { Institution, AcademicInfo, Application, UserData } from "@/components/student/types";
 
 // Update the API URL to use the environment variable from Vite
-const API_URL = "uniform-production.up.railway.app";
+const API_URL = import.meta.env.VITE_API_URL;
 
 // Create axios instance with default config
 const api = axios.create({
