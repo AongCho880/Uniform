@@ -245,7 +245,7 @@ function RouteComponent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+    
     // Mark all fields as touched
     const allTouched: Record<string, boolean> = {};
     Object.keys(formData).forEach(key => {
@@ -262,7 +262,7 @@ function RouteComponent() {
     }
 
     setIsLoading(true);
-
+    console.log("formData---------: \n",formData);
     try {
       // Format the phone number
       const formattedPhone = formatPhoneNumber(formData.phone);
