@@ -260,9 +260,10 @@ function RouteComponent() {
       });
       return;
     }
-
-    setIsLoading(true);
+    
     console.log("formData---------: \n",formData);
+    setIsLoading(true);
+    
     try {
       // Format the phone number
       const formattedPhone = formatPhoneNumber(formData.phone);
