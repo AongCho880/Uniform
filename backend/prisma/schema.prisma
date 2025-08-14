@@ -8,125 +8,107 @@ datasource db {
 }
 
 model Student {
-  studentId String   @id @default(uuid())
-  fullName String   @db.VarChar(190)
-  email     String   @unique
-  phone     String?  @db.VarChar(15)
-  password  String   @db.VarChar(255)
-  address   String?  @db.VarChar(300)
-  role      String   @default("STUDENT")
-  dob       DateTime
-  profile   String?
-  // New fields from frontend
-  examPath    String?   // NATIONAL or MADRASHA
-  medium      String?   // Bangla, English, Arabic
-  // SSC Details
-  sscRoll        String? @db.VarChar(50)
-  sscRegistration String? @db.VarChar(50)
-  sscGpa         Float?
-  sscYear        Int?
-  sscBoard       String? @db.VarChar(50)
-  // HSC Details
-  hscRoll        String? @db.VarChar(50)
-  hscRegistration String? @db.VarChar(50)
-  hscGpa         Float?
-  hscYear        Int?
-  hscBoard       String? @db.VarChar(50)
-  // Dakhil Details
-  dakhilRoll     String? @db.VarChar(50)
-  dakhilRegistration String? @db.VarChar(50)
-  dakhilGpa      Float?
-  dakhilYear     Int?
-  dakhilBoard    String? @db.VarChar(50)
-  // Alim Details
-  alimRoll       String? @db.VarChar(50)
-  alimRegistration String? @db.VarChar(50)
-  alimGpa        Float?
-  alimYear       Int?
-  alimBoard      String? @db.VarChar(50)
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  forms              Form[]
+  studentId          String               @id @default(uuid())
+  email              String               @unique
+  phone              String?              @db.VarChar(15)
+  password           String               @db.VarChar(255)
+  address            String?              @db.VarChar(300)
+  role               String               @default("STUDENT")
+  dob                DateTime
+  profile            String?
+  createdAt          DateTime             @default(now())
+  fullName           String               @db.VarChar(190)
+  updatedAt          DateTime             @default(now()) @updatedAt
+  alimBoard          String?              @db.VarChar(50)
+  alimGpa            Float?
+  alimRegistration   String?              @db.VarChar(50)
+  alimRoll           String?              @db.VarChar(50)
+  alimYear           Int?
+  dakhilBoard        String?              @db.VarChar(50)
+  dakhilGpa          Float?
+  dakhilRegistration String?              @db.VarChar(50)
+  dakhilRoll         String?              @db.VarChar(50)
+  dakhilYear         Int?
+  examPath           String?
+  hscBoard           String?              @db.VarChar(50)
+  hscGpa             Float?
+  hscRegistration    String?              @db.VarChar(50)
+  hscRoll            String?              @db.VarChar(50)
+  hscYear            Int?
+  medium             String?
+  sscBoard           String?              @db.VarChar(50)
+  sscGpa             Float?
+  sscRegistration    String?              @db.VarChar(50)
+  sscRoll            String?              @db.VarChar(50)
+  sscYear            Int?
   AppliedInstitution AppliedInstitution[]
+  forms              Form?
 }
 
 model Form {
-  formId    String @id @default(uuid())
-  studentId String @unique
+  formId    String  @id @default(uuid())
+  studentId String  @unique
   board     String
-  reg       Int    @unique
-  hscRoll   Int    @unique
-  sscRoll   Int    @unique
+  reg       Int     @unique
+  hscRoll   Int     @unique
+  sscRoll   Int     @unique
   hscGPA    Float
   sscGPA    Float
-  student Student @relation(fields: [studentId], references: [studentId])
+  student   Student @relation(fields: [studentId], references: [studentId])
 }
 
 model Systemadmin {
-  systemAdminId String @id @default(uuid())
-  email         String @unique
-  password      String @db.VarChar(255)
-  role          String @default("SYSTEM_ADMIN")
+  systemAdminId String   @id @default(uuid())
+  email         String   @unique
+  password      String   @db.VarChar(255)
+  role          String   @default("SYSTEM_ADMIN")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
 }
 
 model Admin {
-  adminId   String   @id @default(uuid())
-  email     String   @unique
-  password  String   @db.VarChar(255)
-  role      String   @default("INSTITUTION_ADMIN")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  adminId       String       @id @default(uuid())
+  email         String       @unique
+  password      String       @db.VarChar(255)
+  role          String       @default("INSTITUTION_ADMIN")
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now()) @updatedAt
   institutionId String?
   institution   Institution? @relation(fields: [institutionId], references: [institutionId])
 }
 
 model Institution {
-  institutionId      String @id @default(uuid())
-  name               String @unique
-
-  description        String? @db.Text
-  address            String? @db.VarChar(500)
-  phone              String? @db.VarChar(20)
-  email              String?
-  website            String?
-  establishedYear    Int?
-  logoUrl            String? // Institution logo
-
-  requirementsHscGPA Float?
-  requirementsSscGPA Float?
-
-  institutionCategoryInstitutionCategoryId String?               @db.VarChar(255) // Foreign key to InstitutionCategory
-
-  institutionForms                         InstitutionForm[]
-  AppliedInstitution                       AppliedInstitution[]
+  institutionId                            String               @id @default(uuid())
+  name                                     String
+  requirementsHscGPA                       Float
+  requirementsSscGPA                       Float
+  institutionCategoryInstitutionCategoryId String?              @db.VarChar(255)
   admins                                   Admin[]
+  AppliedInstitution                       AppliedInstitution[]
   InstitutionCategory                      InstitutionCategory? @relation(fields: [institutionCategoryInstitutionCategoryId], references: [institutionCategoryId])
+  institutionForms                         InstitutionForm[]
 }
 
 model InstitutionCategory {
-  institutionCategoryId String @id @default(uuid())
+  institutionCategoryId String        @id @default(uuid())
   name                  String
-  description           String?
-
-  institutions Institution[]
+  description           String
+  institutions          Institution[]
 }
 
 model InstitutionForm {
-  institutionFormId String  @id @default(uuid())
+  institutionFormId String      @id @default(uuid())
   institutionId     String
   fieldName         String
-  fieldType         String // e.g., "text", "number", "file"
-  isRequired        Boolean @default(true)
-  institution Institution @relation(fields: [institutionId], references: [institutionId])
+  fieldType         String
+  isRequired        Boolean     @default(true)
+  institution       Institution @relation(fields: [institutionId], references: [institutionId])
 }
 
 model AppliedInstitution {
-  id            String @id @default(uuid())
+  id            String      @id @default(uuid())
   studentId     String
   institutionId String
-  student     Student     @relation(fields: [studentId], references: [studentId])
-  institution Institution @relation(fields: [institutionId], references: [institutionId])
+  institution   Institution @relation(fields: [institutionId], references: [institutionId])
+  student       Student     @relation(fields: [studentId], references: [studentId])
 }

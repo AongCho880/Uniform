@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.13.0",
+    "@prisma/client": "^6.14.0",
     "@vinejs/vine": "^3.0.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -24,6 +24,6 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "prisma": "^6.13.0"
+    "prisma": "^6.14.0"
   }
 }
