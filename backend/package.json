@@ -7,7 +7,7 @@
   "scripts": {
     "build": "prisma generate",
     "start": "node server.js",
-    "dev": "nodemon server.js",
+    "server": "nodemon server.js",
     "migrate:deploy": "prisma migrate deploy"
   },
   "keywords": [],
