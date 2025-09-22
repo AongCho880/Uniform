@@ -37,7 +37,7 @@ export default function DangerZoneTab({ onLogout, navigate }: DangerZoneTabProps
           description: "Your account has been permanently deleted."
         });
         onLogout();
-        navigate({ to: "/studentLogin" });
+        navigate({ to: "/student/studentLogin" });
       } else {
         toast.error("Deletion Failed", {
           description: "Could not delete your account. Please check your password and try again."
