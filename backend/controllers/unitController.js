@@ -554,14 +554,13 @@ class unitController {
 
   static async listUnits(req, res) {
     try {
-      const page = Number(req.query.page) || 1;
-      const limit = Number(req.query.limit) || 1;
-
-      if (page <= 0) {
+      let page = Number(req.query.page);
+      if (!Number.isInteger(page) || page <= 0) {
         page = 1;
       }
 
-      if (limit <= 0 || limit > 100) {
+      let limit = Number(req.query.limit);
+      if (!Number.isInteger(limit) || limit <= 0 || limit > 100) {
         limit = 5;
       }
 
