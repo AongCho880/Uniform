@@ -17,6 +17,8 @@ export const Route = createFileRoute('/admin/admins')({
 
 function RouteComponent() {
   const navigate = useNavigate()
+  const search = Route.useSearch() as Partial<{ create: '0' | '1' }>
+  const openCreate = search.create === '1'
 
   const onTabChange = (tab: string) => {
     switch (tab) {
@@ -39,8 +41,7 @@ function RouteComponent() {
 
   return (
     <AdminLayout activeTab={'admins'} onTabChange={onTabChange}>
-      <AdminManagement />
+      <AdminManagement openCreate={openCreate} />
     </AdminLayout>
   )
 }
-

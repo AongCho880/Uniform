@@ -15,11 +15,13 @@ import {
   Eye,
   AlertCircle
 } from 'lucide-react';
+import { useNavigate } from '@tanstack/react-router';
 
 export function DashboardOverview() {
   const [institutions, setInstitutions] = useState<Institution[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<{ institutions: number; units: number; students: number; applications: number } | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchInstitutions();
@@ -47,19 +49,19 @@ export function DashboardOverview() {
   };
 
   const handleCreateInstitution = () => {
-    toast.info('Create Institution functionality to be implemented');
+    navigate({ to: '/admin/institutions', search: { create: '1' } });
   };
 
   const handleCreateAdmin = () => {
-    toast.info('Create Admin functionality to be implemented');
+    navigate({ to: '/admin/admins', search: { create: '1' } });
   };
 
   const handleViewInstitutions = () => {
-    toast.info('View Institutions functionality to be implemented');
+    navigate({ to: '/admin/institutions' });
   };
 
   const handleViewAdmins = () => {
-    toast.info('View Admins functionality to be implemented');
+    navigate({ to: '/admin/admins' });
   };
 
   if (loading) {

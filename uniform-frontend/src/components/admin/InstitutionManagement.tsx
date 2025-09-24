@@ -29,6 +29,7 @@ interface InstitutionManagementProps {
   onPageChange?: (page: number) => void;
   onSearchChange?: (search: string) => void;
   onSortChange?: (field: 'name' | 'createdAt', direction: 'asc' | 'desc') => void;
+  openCreate?: boolean;
 }
 
 export function InstitutionManagement(props: InstitutionManagementProps = {}) {
@@ -220,7 +221,10 @@ export function InstitutionManagement(props: InstitutionManagementProps = {}) {
           <h1 className="text-2xl font-bold">Institution Management</h1>
           <p className="text-gray-500">Manage educational institutions</p>
         </div>
-        <CreateInstitutionDialog onInstitutionCreated={fetchInstitutions} />
+        <CreateInstitutionDialog
+          onInstitutionCreated={fetchInstitutions}
+          defaultOpen={props.openCreate}
+        />
       </div>
 
       <Card>

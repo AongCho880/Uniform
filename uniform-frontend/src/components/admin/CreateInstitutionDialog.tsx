@@ -48,10 +48,14 @@ interface CreateInstitutionPayload {
 
 interface CreateInstitutionDialogProps {
   onInstitutionCreated: () => void;
+  // When true, the dialog opens by default (useful for deep-links)
+  defaultOpen?: boolean;
+  // When true, hides the internal trigger button so parent controls opening
+  hideTrigger?: boolean;
 }
 
-export function CreateInstitutionDialog({ onInstitutionCreated }: CreateInstitutionDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export function CreateInstitutionDialog({ onInstitutionCreated, defaultOpen = false, hideTrigger = false }: CreateInstitutionDialogProps) {
+  const [isOpen, setIsOpen] = useState(!!defaultOpen);
   const [newInstitution, setNewInstitution] = useState({
     name: '',
     shortName: '',
@@ -159,12 +163,14 @@ export function CreateInstitutionDialog({ onInstitutionCreated }: CreateInstitut
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Institution
-        </Button>
-      </DialogTrigger>
+      {!hideTrigger && (
+        <DialogTrigger asChild>
+          <Button>
+            <Plus className="mr-2 h-4 w-4" />
+            Create Institution
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="sm:max-w-[640px] max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Create New Institution</DialogTitle>

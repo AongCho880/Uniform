@@ -24,7 +24,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Plus, Eye, EyeOff, AlertCircle, Trash2 } from 'lucide-react'
 import axios from 'axios'
 
-export function AdminManagement() {
+interface AdminManagementProps {
+  openCreate?: boolean
+}
+
+export function AdminManagement({ openCreate = false }: AdminManagementProps) {
   const [institutions, setInstitutions] = useState<Institution[]>([])
   const [admins, setAdmins] = useState<Admin[]>([])
   const [loadingAdmins, setLoadingAdmins] = useState(true)
@@ -93,6 +97,12 @@ export function AdminManagement() {
   useEffect(() => {
     fetchInstitutions()
   }, [])
+
+  useEffect(() => {
+    if (openCreate) {
+      setIsCreateDialogOpen(true)
+    }
+  }, [openCreate])
 
   useEffect(() => {
     void fetchAdmins(currentPage, itemsPerPage)
