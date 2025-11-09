@@ -143,5 +143,3 @@ Vite will start on `http://localhost:5173` by default. Ensure `VITE_API_URL` poi
 - Adjust seed data (deadlines/exam dates/GPAs) in `backend/routes/seed_universities.js` to suit your current admission cycle
 - Deploy backend with your preferred platform and point the frontend `VITE_API_URL` to the deployed API
 
----
-If you want, I can also add npm scripts like `npm run seed:admins` and `npm run seed:universities` to streamline seeding.
